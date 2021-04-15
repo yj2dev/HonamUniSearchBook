@@ -30,6 +30,6 @@ def SerchBorrowInfo(cno):
       temp.append(stamnummer)
       temp.append(borrower)
       borrowInfo.append(temp)
-  except KeyError:
-    print("대출정보가 없는 책입니다. 같은 이름의 책이 여러개일 경우 다른책을 선택하세요.")
+  except:
+    pass
   return borrowInfo
