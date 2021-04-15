@@ -41,6 +41,8 @@ else:
         # 아직 서가에 비치되지 않은 책일경우
         if "배가중" in borrow[7]:   
           print("["+str(j)+"]["+borrow[0]+"] 아직 서가에 비치되지 않았습니다. ")
+        elif "진로개발센터" in borrow[7]:
+          print("["+str(j)+"]["+borrow[0]+"] 진로개발센터에서 소장중인 도서입니다. ")
         else:
           print("["+str(j)+"]["+borrow[0]+"] 대출자: "+borrow[6]+"("+borrow[7]+") 반납 예정일: "+borrow[5] )
       j = j+1
