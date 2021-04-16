@@ -1,4 +1,4 @@
-from SerchBook import SearchLibraryBookPossession
+from SearchBook import SearchLibraryBookPossession
 from BorrowBookInfo import SerchBorrowInfo
 
 # 도서관에서 책을 소장하고 있는지 검색
@@ -6,7 +6,7 @@ print("책 제목을 입력하세요: ",end='')
 userInput = input()
 i = 1
 j = 1
-bookSearchInfo = SearchLibraryBookPossession(userInput) # [0] 책 제목 ㅣ [1] 작가 ㅣ [2] 출판사 ㅣ [3] 책출판년도 ㅣ [4] 책관리번호
+bookSearchInfo = SearchLibraryBookPossession(userInput,"T") # [0] 책 제목 ㅣ [1] 작가 ㅣ [2] 출판사 ㅣ [3] 책출판년도 ㅣ [4] 책관리번호 ㅣ [5] 책 이미지
 
 # 검색결과가 없을때
 if bookSearchInfo== []:

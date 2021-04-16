@@ -3,12 +3,12 @@ import urllib.parse
 import json
 
 # 사용자가 입력한 책이 호남대학교 도서관에 소장중인지 확인하는 함수
-def SearchLibraryBookPossession(bookTitle):
+def SearchLibraryBookPossession(bookTitle, searchType):
   # api 주소
   api = "http://library.honam.ac.kr/cheetah/api/search?"
   # 세부검색 설정
   values = {
-    "otwa1":"T",        # T = 서명 / TK = 서명 키워드 / A = 저자명 / AK = 저자명 키워드 / P = 출판사 
+    "otwa1":searchType,        # T = 서명 / TK = 서명 키워드 / A = 저자명 / AK = 저자명 키워드 / P = 출판사 
                         # IDX = 통합 / S = 주제명 / SK = 주제명 키워드 / X = 총서명 / XK = 총서명 키워드 / N = ISBN,ISSN / NC = 청구기호 / R = 등록번호 
     "otod1": bookTitle, # 검색할 문자열
     "otbool1":"A",      # A = AND / O = OR  N = NOT
@@ -42,6 +42,7 @@ def SearchLibraryBookPossession(bookTitle):
     # isbn = search["ISBN"]               # 책 ISBN
     # callNumber = search["CallNumber"]   # 도서관 책 위치
     cno = search["Cno"]                   # 호대 책관리 번호
+    bookImg = "http://library.honam.ac.kr/Cheetah/Shared/CoverImage?Cno=" + str(cno)
     temp.append(bookTitle)
     temp.append(author)
     temp.append(publisher)
@@ -49,5 +50,6 @@ def SearchLibraryBookPossession(bookTitle):
     # temp.append(isbn)
     # temp.append(callNumber)
     temp.append(cno)
+    temp.append(bookImg)
     bookSearchData.append(temp)
   return bookSearchData
