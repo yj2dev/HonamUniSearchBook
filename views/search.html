@@ -42,6 +42,7 @@
 
     <!-- Result Section -->
     <section id="result">
+      {% for i in range(0, result_cnt.val) %}
       <table class="table__result">
         <tr>
           <td rowspan="3"><img src="http://placehold.it/100x150" /></td>
@@ -56,6 +57,7 @@
           <td colspan="2">미정 :</td>
         </tr>
       </table>
+      {% endfor %}
     </section>
     <!-- End Result Section -->
 

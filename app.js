@@ -2,10 +2,10 @@ const nunjucks = require("nunjucks");
 const express = require("express");
 const path = require("path");
 const app = express();
+const router = express.Router();
 
 const indexRouter = require("./routes/index");
 const searchRouter = require("./routes/search");
-
 app.use(express.static(path.join(__dirname, "/")));
 app.set("port", process.env.PORT || 8004);
 app.set("view engine", "html");
