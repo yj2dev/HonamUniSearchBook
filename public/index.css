@@ -102,7 +102,7 @@ button:focus {
 }
 /* End Search Section */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 550px) {
   header {
     font-size: 7vw;
     bottom: 50px;

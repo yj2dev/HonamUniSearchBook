@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <title>도서 도우미</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <i class="fas fa-book"></i>
+      <div class="title">도서 도우미</div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Search Section -->
+    <section id="search">
+      <form action="/search" method="GET">
+        <div class="selectBox">
+          <select class="selectList" id="option">
+            <option>도서명</option>
+            <option>저자명</option>
+            <option>출판사</option>
+          </select>
+          <i class="fas fa-caret-down"></i>
+        </div>
+        <input type="text" name="id" placeholder="키워드를 입력하세요." />
+        <button type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+    </section>
+    <!-- End Search Section -->
+
+    <script>
+      // console.log("load index.html - script");
+      // const form = document.querySelector("form");
+      // form.addEventListener("submit", (e) => {
+      //   console.log("click search btn");
+      //   location.href = "/search";
+      //   e.preventDefault();
+      // });
+    </script>
+  </body>
+</html>
