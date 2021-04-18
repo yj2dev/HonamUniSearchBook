@@ -7,7 +7,7 @@ import json
 
 
 
-data = json.loads(bookSearchResultPage("백화점","T"))
+data = json.loads(bookSearchResultPage("자바","T"))
 for bookInfo in data:
   print("책이미지 : " + bookInfo['bookImg'])
   print("책이름 : " + bookInfo['newBookTitle'])

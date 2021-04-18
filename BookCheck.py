@@ -3,8 +3,6 @@ import urllib.parse
 import json
 from bs4 import BeautifulSoup
 
-
-
 def bookSearchResultPage(keyword, searchType):
   # api 주소
   api = "http://library.honam.ac.kr/cheetah/api/search?"
@@ -44,7 +42,7 @@ def bookSearchResultPage(keyword, searchType):
     publishYear = search["PublishYear"]   # 책 출판년도
     callNumber = search["CallNumber"]     # 책 청구기호
     if callNumber != "":
-      callNumber = "("+callNumber+")"
+      callNumber = "("+str(callNumber)+")"
     cno = search["Cno"]                   # 호대 책관리 번호
     bookImg = "http://library.honam.ac.kr/Cheetah/Shared/CoverImage?Cno=" + str(cno)
     newBookTitle = bookTitle + "(" + str(publishYear) + ")"
