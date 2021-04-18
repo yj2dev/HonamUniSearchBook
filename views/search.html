@@ -49,27 +49,22 @@
 
     <!-- Result Section -->
     <section id="result">
-      {% for i in range(0, 2) %}
+      {% for i in range(0, bookcount.value) %}
       <div class="result__book">
         <div class="book__img">
-          <img src="{{bookimg}}" width="80" height="120" />
+          <img src="{{bookimg[i]}}" width="80" height="120" />
         </div>
         <div class="book__info">
-          <div class="book book__title">{{title}}</div>
-          <div class="book book__date">{{writer}} | {{publisher}}</div>
-          <div class="book book__location">소장위치 : {{location}}</div>
-          <div class="book book__state">도서상태 : {{state}}</div>
+          <div class="book book__title">{{title[i]}}</div>
+          <div class="book book__date">{{writer[i]}} | {{publisher[i]}}</div>
+          <div class="book book__location">소장위치 : {{location[i]}}</div>
+          <div class="book book__state">도서상태 : {{state[i]}}</div>
         </div>
       </div>
       {% endfor %}
     </section>
     <!-- End Result Section -->
 
-    <script>
-      const header = document.querySelector("header");
-      header.addEventListener("click", () => {
-        location.href = "/";
-      });
-    </script>
+    <script src="func.js"></script>
   </body>
 </html>

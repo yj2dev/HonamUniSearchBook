@@ -1,18 +1,27 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const app = express();
 const { PythonShell } = require("python-shell");
 
-let book_cnt = null;
-let bookimg = null;
-let title = null;
-let writer = "조지 오웰";
-let publisher = "민음사";
-let location = "2층 소설";
-let state = "대출 불가";
+let bookcount = null;
+let bookimg = [];
+let title = [];
+let writer = [];
+let publisher = [];
+let location = [];
+let state = [];
 
-convertType = (type) => {
+const reset = () => {
+  bookcount = null;
+  bookimg = [];
+  title = [];
+  writer = [];
+  publisher = [];
+  location = [];
+  state = [];
+};
+
+const convertType = (type) => {
   switch (type) {
     case "저자명":
       return "A";
@@ -23,27 +32,27 @@ convertType = (type) => {
   }
 };
 
-putData = (data, index) => {
+const putData = (data, index) => {
   let dataindex = index % 6;
 
   switch (dataindex) {
     case 0:
-      bookimg = data;
+      bookimg.push(data);
       break;
     case 1:
-      title = data;
+      title.push(data);
       break;
     case 2:
-      writer = data;
+      writer.push(data);
       break;
     case 3:
-      publisher = data;
+      publisher.push(data);
       break;
     case 4:
-      location = data;
+      location.push(data);
       break;
     case 5:
-      state = data;
+      state.push(data);
       break;
       deafualt: break;
   }
@@ -70,11 +79,12 @@ router.get("/", async (req, res, next) => {
     option,
     (err, res) => {
       if (err) throw err;
-      bookCnt = 2;
+      reset();
+      bookcount = 0;
       let i = 0;
       let j = 0;
       while (res[i] !== undefined) {
-        bookCnt += 1;
+        bookcount += 1;
 
         for (j = i; j < i + 6; j++) {
           console.log(j);
@@ -87,6 +97,7 @@ router.get("/", async (req, res, next) => {
       }
 
       console.log(":: END LOOP");
+      console.log("자료 개수 : ", bookcount);
     }
   );
   res.render("search", {
@@ -97,8 +108,8 @@ router.get("/", async (req, res, next) => {
     location: location,
     state: state,
     previous_keyword: previous_keyword,
-    book_cnt: {
-      val: book_cnt,
+    bookcount: {
+      value: bookcount,
     },
   });
 });
