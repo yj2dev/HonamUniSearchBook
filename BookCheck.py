@@ -63,6 +63,7 @@ def bookSearchResultPage(keyword, searchType):
           bookWhere = bookData.select_one("td:nth-child(3)").text.strip()
           if bookData.select_one("td:nth-child(4)").text.strip() == "대출가능":
             bookRentalNum = bookRentalNum + 1
+
       if bookRentalNum > 0:
         isRental = str(bookRentalNum) + "권 대출가능"
       else:
@@ -77,7 +78,8 @@ def bookSearchResultPage(keyword, searchType):
     temp.append(bookLocation)
     temp.append(isRental)
     bookSearchData.append(temp)
-  return bookSearchData
+  reply = json.dumps(bookSearchData)
+  return reply
 
 
 
