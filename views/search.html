@@ -65,6 +65,11 @@
     </section>
     <!-- End Result Section -->
 
-    <script src="func.js"></script>
+    <script>
+      const header = document.querySelector("header");
+      header.addEventListener("click", () => {
+        location.href = "/";
+      });
+    </script>
   </body>
 </html>
