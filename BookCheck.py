@@ -78,8 +78,8 @@ def bookSearchResultPage(keyword, searchType):
     temp.append(bookLocation)
     temp.append(isRental)
     bookSearchData.append(temp)
-  reply = json.dumps(bookSearchData)
-  return reply
+
+  return bookSearchData
 
 
 

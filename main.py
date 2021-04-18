@@ -7,7 +7,7 @@ from BookCheck import bookSearchResultPage
 
 
 
-data = bookSearchResultPage("해리포터","T")
+data = bookSearchResultPage("백화점","T")
 
 for bookInfo in data:
   print("책이미지 : " + bookInfo[0])
