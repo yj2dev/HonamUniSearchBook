@@ -2,7 +2,7 @@ import requests
 import urllib.parse
 import json
 from bs4 import BeautifulSoup
-import time
+
 
 
 def bookSearchResultPage(keyword, searchType):
