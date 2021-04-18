@@ -25,14 +25,21 @@
     <section id="search">
       <form action="/search">
         <div class="selectBox">
-          <select class="selectList" id="option">
+          <select class="selectList" name="option">
             <option>도서명</option>
             <option>저자명</option>
             <option>출판사</option>
           </select>
           <i class="fas fa-caret-down"></i>
         </div>
-        <input type="text" name="keyword" placeholder="키워드를 입력하세요." />
+
+        <input
+          type="text"
+          name="keyword"
+          placeholder="키워드를 입력하세요."
+          value="{{previous_keyword}}"
+          autofocus
+        />
         <button type="submit">
           <i class="fas fa-search"></i>
         </button>
@@ -42,32 +49,27 @@
 
     <!-- Result Section -->
     <section id="result">
-      {% for i in range(0, result_cnt.val) %}
-      <table class="table__result">
-        <tr>
-          <td rowspan="3"><img src="http://placehold.it/100x150" /></td>
-          <td>도서명 : {{title}}</td>
-          <td>작가명 : {{writer}}</td>
-        </tr>
-        <tr>
-          <td>출판사 : {{publisher}}</td>
-          <td>출판일 : {{date}}</td>
-        </tr>
-        <tr>
-          <td colspan="2">미정 :</td>
-        </tr>
-      </table>
+      {% for i in range(0, book_cnt.val) %}
+      <div class="result__book">
+        <div class="book__img">
+          <img src="http://placehold.it/80x120" />
+        </div>
+        <div class="book__info">
+          <div class="book book__title">{{title}}</div>
+          <div class="book book__date">{{writer}} | {{publisher}}</div>
+          <div class="book book__location">소장위치 : {{location}}</div>
+          <div class="book book__state">도서상태 : {{state}}</div>
+        </div>
+      </div>
       {% endfor %}
     </section>
     <!-- End Result Section -->
 
-    <!-- <script>
-      const a = document.querySelector(".title");
-      const form = document.querySelector("form");
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        a.innerHTML = "ASDFSA";
+    <script>
+      const header = document.querySelector("header");
+      header.addEventListener("click", () => {
+        location.href = "/";
       });
-    </script> -->
+    </script>
   </body>
 </html>

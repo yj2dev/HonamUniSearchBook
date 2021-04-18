@@ -2,6 +2,11 @@ import requests
 import urllib.parse
 import json
 from bs4 import BeautifulSoup
+import sys
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
+
 
 def bookSearchResultPage(keyword, searchType):
   # api 주소
@@ -36,13 +41,14 @@ def bookSearchResultPage(keyword, searchType):
   req = json.loads(req.text)
   bookSearchData = [] # 검색결과 저장
   for search in req["ListItem"]["BasicItem"]:
+    temp = []
     bookTitle = search["Title"]           # 책 제목
     author = search["Author"]             # 작가
     publisher = search["Publisher"]       # 출판사
     publishYear = search["PublishYear"]   # 책 출판년도
     callNumber = search["CallNumber"]     # 책 청구기호
     if callNumber != "":
-      callNumber = "("+str(callNumber)+")"
+      callNumber = "("+callNumber+")"
     cno = search["Cno"]                   # 호대 책관리 번호
     bookImg = "http://library.honam.ac.kr/Cheetah/Shared/CoverImage?Cno=" + str(cno)
     newBookTitle = bookTitle + "(" + str(publishYear) + ")"
@@ -62,7 +68,6 @@ def bookSearchResultPage(keyword, searchType):
           bookWhere = bookData.select_one("td:nth-child(3)").text.strip()
           if bookData.select_one("td:nth-child(4)").text.strip() == "대출가능":
             bookRentalNum = bookRentalNum + 1
-
       if bookRentalNum > 0:
         isRental = str(bookRentalNum) + "권 대출가능"
       else:
@@ -70,16 +75,12 @@ def bookSearchResultPage(keyword, searchType):
     except:
       isRental = "대출불가"
     bookLocation = bookWhere+callNumber
-    bookSearchData.append({"bookImg":bookImg, "newBookTitle":newBookTitle, "author":author, "publisher":publisher, "bookLocation":bookLocation, "isRental":isRental})
-    # temp.append(newBookTitle)
-    # temp.append(author)
-    # temp.append(publisher)
-    # temp.append(bookLocation)
-    # temp.append(isRental)
-    # bookSearchData.append(temp)
-  toJson = json.dumps(bookSearchData,ensure_ascii=False, indent='\t')
-  return toJson
+    print(bookImg)
+    print(newBookTitle)
+    print(author)
+    print(publisher)
+    print(bookLocation)
+    print(isRental)
 
-
-
-
+if __name__ == '__main__':
+    bookSearchResultPage(sys.argv[1], sys.argv[2])

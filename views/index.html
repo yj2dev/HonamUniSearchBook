@@ -25,29 +25,30 @@
     <section id="search">
       <form action="/search" method="GET">
         <div class="selectBox">
-          <select class="selectList" id="option">
+          <select class="selectList" name="option">
             <option>도서명</option>
             <option>저자명</option>
             <option>출판사</option>
           </select>
           <i class="fas fa-caret-down"></i>
         </div>
-        <input type="text" name="id" placeholder="키워드를 입력하세요." />
+        <input
+          type="text"
+          name="keyword"
+          placeholder="키워드를 입력하세요."
+          autofocus
+        />
         <button type="submit">
           <i class="fas fa-search"></i>
         </button>
       </form>
     </section>
     <!-- End Search Section -->
-
     <script>
-      // console.log("load index.html - script");
-      // const form = document.querySelector("form");
-      // form.addEventListener("submit", (e) => {
-      //   console.log("click search btn");
-      //   location.href = "/search";
-      //   e.preventDefault();
-      // });
+      const header = document.querySelector("header");
+      header.addEventListener("click", () => {
+        location.href = "/";
+      });
     </script>
   </body>
 </html>
