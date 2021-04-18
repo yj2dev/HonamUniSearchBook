@@ -1,3 +1,4 @@
+//JavaScript와 Python 에서 서로 인자를 공유하기 위한 샘플 파일입니다
 // const spawn = require("child_process").spawn;
 const { PythonShell } = require("python-shell");
 // let pyshell = new PythonShell("data.py");
@@ -45,4 +46,5 @@ PythonShell.run("data.py", option, (err, res) => {
 
 // process.stderr.on("data", function (data) {
 //   console.error(data.toString());
+
 // });
