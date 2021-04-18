@@ -2,6 +2,8 @@ import requests
 import urllib.parse
 import json
 from bs4 import BeautifulSoup
+import time
+
 
 def bookSearchResultPage(keyword, searchType):
   # api 주소
@@ -36,7 +38,6 @@ def bookSearchResultPage(keyword, searchType):
   req = json.loads(req.text)
   bookSearchData = [] # 검색결과 저장
   for search in req["ListItem"]["BasicItem"]:
-    temp = []
     bookTitle = search["Title"]           # 책 제목
     author = search["Author"]             # 작가
     publisher = search["Publisher"]       # 출판사
@@ -71,15 +72,15 @@ def bookSearchResultPage(keyword, searchType):
     except:
       isRental = "대출불가"
     bookLocation = bookWhere+callNumber
-    temp.append(bookImg)
-    temp.append(newBookTitle)
-    temp.append(author)
-    temp.append(publisher)
-    temp.append(bookLocation)
-    temp.append(isRental)
-    bookSearchData.append(temp)
-
-  return bookSearchData
+    bookSearchData.append({"bookImg":bookImg, "newBookTitle":newBookTitle, "author":author, "publisher":publisher, "bookLocation":bookLocation, "isRental":isRental})
+    # temp.append(newBookTitle)
+    # temp.append(author)
+    # temp.append(publisher)
+    # temp.append(bookLocation)
+    # temp.append(isRental)
+    # bookSearchData.append(temp)
+  toJson = json.dumps(bookSearchData,ensure_ascii=False, indent='\t')
+  return toJson
 
 
 

@@ -9,14 +9,14 @@ from BookCheck import bookSearchResultPage
 
 data = bookSearchResultPage("백화점","T")
 
-for bookInfo in data:
-  print("책이미지 : " + bookInfo[0])
-  print("책이름 : " + bookInfo[1])
-  print("지은이 : " + bookInfo[2])
-  print("출판사 : " + bookInfo[3])
-  print("소장위치 : " + bookInfo[4])
-  print("도서상태 : " + bookInfo[5])
-  print()
+# for bookInfo in data:
+#   print("책이미지 : " + bookInfo[0])
+#   print("책이름 : " + bookInfo[1])
+#   print("지은이 : " + bookInfo[2])
+#   print("출판사 : " + bookInfo[3])
+#   print("소장위치 : " + bookInfo[4])
+#   print("도서상태 : " + bookInfo[5])
+#   print()
 
 
 
