@@ -49,10 +49,10 @@
 
     <!-- Result Section -->
     <section id="result">
-      {% for i in range(0, book_cnt.val) %}
+      {% for i in range(0, 2) %}
       <div class="result__book">
         <div class="book__img">
-          <img src="http://placehold.it/80x120" />
+          <img src="{{bookimg}}" width="80" height="120" />
         </div>
         <div class="book__info">
           <div class="book book__title">{{title}}</div>
