@@ -99,19 +99,24 @@ router.get("/", async (req, res, next) => {
       bookcount = 0;
       let i = 0;
       let j = 0;
-      while (res[i] !== undefined) {
-        bookcount += 1;
+      if (res !== "NULL") {
+        try {
+          while (res[i] !== undefined) {
+            bookcount += 1;
 
-        for (j = i; j < i + 6; j++) {
-          console.log(j);
-          console.log(res[j]);
-          putData(res[j], j);
+            for (j = i; j < i + 6; j++) {
+              console.log(j);
+              console.log(res[j]);
+              putData(res[j], j);
+            }
+            console.log("OUT LOOP");
+
+            i = j;
+          }
+        } catch (error) {
+          console.error(error);
         }
-        console.log("OUT LOOP");
-
-        i = j;
       }
-
       console.log(":: END LOOP");
       console.log("자료 개수 : ", bookcount);
       return draw(routerResponse);
