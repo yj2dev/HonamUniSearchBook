@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require("path");
 const { PythonShell } = require("python-shell");
 
+let previous_keyword;
 let bookcount = null;
 let bookimg = [];
 let title = [];
@@ -58,8 +59,22 @@ const putData = (data, index) => {
   }
 };
 
+const draw = (res) => {
+  res.render("search", {
+    bookimg: bookimg,
+    title: title,
+    writer: writer,
+    publisher: publisher,
+    location: location,
+    state: state,
+    previous_keyword: previous_keyword,
+    bookcount: {
+      value: bookcount,
+    },
+  });
+};
 router.get("/", async (req, res, next) => {
-  const previous_keyword = req.query.keyword;
+  previous_keyword = req.query.keyword;
   const INPUT = req.query.keyword;
   const TYPE = req.query.option;
   const CONVERTTYPE = convertType(TYPE);
@@ -74,6 +89,7 @@ router.get("/", async (req, res, next) => {
     args: [INPUT, CONVERTTYPE],
   };
 
+  // const processData = () => {
   PythonShell.run(
     path.join(__dirname, "../BookCheck.py"),
     option,
@@ -98,20 +114,12 @@ router.get("/", async (req, res, next) => {
 
       console.log(":: END LOOP");
       console.log("자료 개수 : ", bookcount);
+      return draw(routerResponse);
     }
   );
-  res.render("search", {
-    bookimg: bookimg,
-    title: title,
-    writer: writer,
-    publisher: publisher,
-    location: location,
-    state: state,
-    previous_keyword: previous_keyword,
-    bookcount: {
-      value: bookcount,
-    },
-  });
+  // };
+  const routerResponse = res;
+  // processData();
 });
 
 module.exports = router;
