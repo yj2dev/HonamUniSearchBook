@@ -7,15 +7,15 @@ import json
 
 
 
-data = json.loads(bookSearchResultPage("자바","T"))
-for bookInfo in data:
-  print("책이미지 : " + bookInfo['bookImg'])
-  print("책이름 : " + bookInfo['newBookTitle'])
-  print("지은이 : " + bookInfo['author'])
-  print("출판사 : " + bookInfo['publisher'])
-  print("소장위치 : " + bookInfo['bookLocation'])
-  print("도서상태 : " + bookInfo['isRental'])
-  print()
+data = json.loads(bookSearchResultPage("오리","T"))
+# for bookInfo in data:
+#   print("책이미지 : " + bookInfo['bookImg'])
+#   print("책이름 : " + bookInfo['newBookTitle'])
+#   print("지은이 : " + bookInfo['author'])
+#   print("출판사 : " + bookInfo['publisher'])
+#   print("소장위치 : " + bookInfo['bookLocation'])
+#   print("도서상태 : " + bookInfo['isRental'])
+#   print()
 
 
 

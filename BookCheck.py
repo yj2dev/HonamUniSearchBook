@@ -36,51 +36,53 @@ def bookSearchResultPage(keyword, searchType):
   # 인코딩 후 링크 생성
   params = urllib.parse.urlencode(values)
   url = api + params
-
   req = requests.get(url)
   req = json.loads(req.text)
-  bookSearchData = [] # 검색결과 저장
-  for search in req["ListItem"]["BasicItem"]:
-    temp = []
-    bookTitle = search["Title"]           # 책 제목
-    author = search["Author"]             # 작가
-    publisher = search["Publisher"]       # 출판사
-    publishYear = search["PublishYear"]   # 책 출판년도
-    callNumber = search["CallNumber"]     # 책 청구기호
-    if callNumber != "":
-      callNumber = "("+callNumber+")"
-    cno = search["Cno"]                   # 호대 책관리 번호
-    bookImg = "http://library.honam.ac.kr/Cheetah/Shared/CoverImage?Cno=" + str(cno)
-    newBookTitle = bookTitle + "(" + str(publishYear) + ")"
-    # 대출정보 확인하기
-    bookRentalNum = 0
-    # 혹시모를 예외 방지 try문
-    try:
-      url2 = "https://library.honam.ac.kr/cheetah/Search/RnoSimpleList?Cno="+cno
-      req2 = requests.get(url2)
-      soup = BeautifulSoup(req2.text,'html.parser')
-      data = soup.select("tbody > tr")
-      bookWhere = "알수없음"
 
-      # 대출가능 권수 계산 ( 쌍촌분관에 있는 책은 제외 )
-      for bookData in data:
-        if (bookData.select_one("td:nth-child(3)").text.strip() != "쌍촌분관"):
-          bookWhere = bookData.select_one("td:nth-child(3)").text.strip()
-          if bookData.select_one("td:nth-child(4)").text.strip() == "대출가능":
-            bookRentalNum = bookRentalNum + 1
-      if bookRentalNum > 0:
-        isRental = str(bookRentalNum) + "권 대출가능"
-      else:
+  if (req["ListItem"]["BasicItem"] == []):
+    print("NULL")
+  else:
+    for search in req["ListItem"]["BasicItem"]:
+      bookTitle = search["Title"]           # 책 제목
+      author = search["Author"]             # 작가
+      publisher = search["Publisher"]       # 출판사
+      publishYear = search["PublishYear"]   # 책 출판년도
+      callNumber = search["CallNumber"]     # 책 청구기호
+      if callNumber != "":
+        callNumber = "("+str(callNumber)+")"
+      cno = search["Cno"]                   # 호대 책관리 번호
+      bookImg = "http://library.honam.ac.kr/Cheetah/Shared/CoverImage?Cno=" + str(cno)
+      newBookTitle = bookTitle + "(" + str(publishYear) + ")"
+      # 대출정보 확인하기
+      bookRentalNum = 0
+      # 혹시모를 예외 방지 try문
+      try:
+        url2 = "https://library.honam.ac.kr/cheetah/Search/RnoSimpleList?Cno="+cno
+        req2 = requests.get(url2)
+        soup = BeautifulSoup(req2.text,'html.parser')
+        data = soup.select("tbody > tr")
+        bookWhere = "알수없음"
+
+        # 대출가능 권수 계산 ( 쌍촌분관에 있는 책은 제외 )
+        for bookData in data:
+          if (bookData.select_one("td:nth-child(3)").text.strip() != "쌍촌분관"):
+            bookWhere = bookData.select_one("td:nth-child(3)").text.strip()
+            if bookData.select_one("td:nth-child(4)").text.strip() == "대출가능":
+              bookRentalNum = bookRentalNum + 1
+        if bookRentalNum > 0:
+          isRental = str(bookRentalNum) + "권 대출가능"
+        else:
+          isRental = "대출불가"
+      except:
         isRental = "대출불가"
-    except:
-      isRental = "대출불가"
-    bookLocation = bookWhere+callNumber
-    print(bookImg)
-    print(newBookTitle)
-    print(author)
-    print(publisher)
-    print(bookLocation)
-    print(isRental)
+      bookLocation = bookWhere+callNumber
+      print(bookImg)
+      print(newBookTitle)
+      print(author)
+      print(publisher)
+      print(bookLocation)
+      print(isRental)
+  
 
-if __name__ == '__main__':
+  if __name__ == '__main__':
     bookSearchResultPage(sys.argv[1], sys.argv[2])
