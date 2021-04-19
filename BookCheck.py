@@ -38,7 +38,6 @@ def bookSearchResultPage(keyword, searchType):
   url = api + params
   req = requests.get(url)
   req = json.loads(req.text)
-
   if (req["ListItem"]["BasicItem"] == []):
     print("NULL")
   else:
@@ -82,7 +81,7 @@ def bookSearchResultPage(keyword, searchType):
       print(publisher)
       print(bookLocation)
       print(isRental)
-  
 
-  if __name__ == '__main__':
-    bookSearchResultPage(sys.argv[1], sys.argv[2])
+
+if __name__ == '__main__':
+  bookSearchResultPage(sys.argv[1], sys.argv[2])
