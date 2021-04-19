@@ -73,6 +73,7 @@ const draw = (res) => {
     },
   });
 };
+
 router.get("/", async (req, res, next) => {
   previous_keyword = req.query.keyword;
   const INPUT = req.query.keyword;
@@ -99,7 +100,7 @@ router.get("/", async (req, res, next) => {
       bookcount = 0;
       let i = 0;
       let j = 0;
-      if (res !== "NULL") {
+      if (res[0] !== "NULL") {
         try {
           while (res[i] !== undefined) {
             bookcount += 1;
@@ -116,6 +117,7 @@ router.get("/", async (req, res, next) => {
         } catch (error) {
           console.error(error);
         }
+      } else {
       }
       console.log(":: END LOOP");
       console.log("자료 개수 : ", bookcount);
