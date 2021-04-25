@@ -22,6 +22,12 @@ def SearchLibraryBookPossessionPage(bookTitle, searchType,sp):
   req = requests.get(url)
   req = json.loads(req.text)
   imgUrl = "http://library.honam.ac.kr/Cheetah/Shared/CoverImage?Cno="
+
+  # [에러처리]검색한 페이지에 자료가 없을경우 NULL 출력
+  if len(req["ListItem"]["BasicItem"]) < 1:
+    print("NULL")
+  
+  # 해당 페이지에 있는 책 정보를 출력
   for search in req["ListItem"]["BasicItem"]:
     cno = search["Cno"]   
     print(search["Title"])         # [0]책 제목
@@ -30,6 +36,6 @@ def SearchLibraryBookPossessionPage(bookTitle, searchType,sp):
     print(search["PublishYear"])   # [3]책 출판년도
     print(cno)                     # [4]책목록 번호
     print(imgUrl+str(cno))         # [5]책 이미지
-
+  
 if __name__ == '__main__':
     SearchLibraryBookPossessionPage(sys.argv[1], sys.argv[2], sys.argv[3])
