@@ -55,10 +55,10 @@
           <img src="{{bookimg[i]}}" width="80" height="120" />
         </div>
         <div class="book__info">
-          <div class="book book__title">{{title[i]}}</div>
-          <div class="book book__date">{{writer[i]}} | {{publisher[i]}}</div>
-          <div class="book book__location">소장위치 : {{location[i]}}</div>
-          <div class="book book__state">도서상태 : {{state[i]}}</div>
+          <div class="book book__title">{{title[i]}}({{publishYear[i]}})</div>
+          <div class="book book__writer">작가 : {{writer[i]}}</div>
+          <div class="book book__publisher">출판사 : {{publisher[i]}}</div>
+          <!-- <div class="book book__cno">{{cno[i]}}</div> -->
         </div>
       </div>
       {% endfor %}

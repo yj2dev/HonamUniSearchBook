@@ -9,17 +9,17 @@ let bookimg = [];
 let title = [];
 let writer = [];
 let publisher = [];
-let location = [];
-let state = [];
+let publishYear = [];
+let cno = [];
 
 const reset = () => {
   bookcount = null;
-  bookimg = [];
   title = [];
   writer = [];
   publisher = [];
-  location = [];
-  state = [];
+  publishYear = [];
+  cno = [];
+  bookimg = [];
 };
 
 const convertType = (type) => {
@@ -38,61 +38,61 @@ const putData = (data, index) => {
 
   switch (dataindex) {
     case 0:
-      bookimg.push(data);
-      break;
-    case 1:
       title.push(data);
       break;
-    case 2:
+    case 1:
       writer.push(data);
       break;
-    case 3:
+    case 2:
       publisher.push(data);
       break;
+    case 3:
+      publishYear.push(data);
+      break;
     case 4:
-      location.push(data);
+      cno.push(data);
       break;
     case 5:
-      state.push(data);
+      bookimg.push(data);
       break;
-      deafualt: break;
+    deafualt: break;
   }
 };
 
 const draw = (res) => {
   res.render("search", {
-    bookimg: bookimg,
     title: title,
     writer: writer,
     publisher: publisher,
-    location: location,
-    state: state,
+    publishYear: publishYear,
+    cno : cno,
+    bookimg: bookimg,
     previous_keyword: previous_keyword,
     bookcount: {
       value: bookcount,
     },
   });
 };
-
 router.get("/", async (req, res, next) => {
   previous_keyword = req.query.keyword;
   const INPUT = req.query.keyword;
   const TYPE = req.query.option;
   const CONVERTTYPE = convertType(TYPE);
+  const PAGES = "1"     // 몇번 페이지를 볼껀지 ( 기본은 1 스크롤 할때마다 1씩 추가/ 아직못만듬 )
   console.log("INPUT: ", INPUT);
   console.log("CONVERTTYPE: ", CONVERTTYPE);
-
+  console.log("PAGES",PAGES)
   const option = {
     mode: "text",
     pythonPath: "",
     pythonOption: ["-u"],
     scriptPath: "",
-    args: [INPUT, CONVERTTYPE],
+    args: [INPUT, CONVERTTYPE,PAGES],
   };
 
   // const processData = () => {
   PythonShell.run(
-    path.join(__dirname, "../BookCheck.py"),
+    path.join(__dirname, "../searchBook.py"),
     option,
     (err, res) => {
       if (err) throw err;
@@ -106,23 +106,23 @@ router.get("/", async (req, res, next) => {
             bookcount += 1;
 
             for (j = i; j < i + 6; j++) {
-              console.log(j);
-              console.log(res[j]);
+              // console.log(j);
+              // console.log(res[j]);
               putData(res[j], j);
             }
-            console.log("OUT LOOP");
+            // console.log("OUT LOOP");
 
             i = j;
           }
         } catch (error) {
           console.error(error);
         }
-      } else {
       }
       console.log(":: END LOOP");
       console.log("자료 개수 : ", bookcount);
       return draw(routerResponse);
     }
+
   );
   // };
   const routerResponse = res;
