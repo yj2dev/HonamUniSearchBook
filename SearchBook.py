@@ -30,12 +30,31 @@ def SearchLibraryBookPossessionPage(bookTitle, searchType,sp):
   # 해당 페이지에 있는 책 정보를 출력
   for search in req["ListItem"]["BasicItem"]:
     cno = search["Cno"]   
+    subCategory = search["SubCategory"]  
     print(search["Title"])         # [0]책 제목
     print(search["Author"])        # [1]작가
     print(search["Publisher"])     # [2]출판사
     print(search["PublishYear"])   # [3]책 출판년도
     print(cno)                     # [4]책목록 번호
     print(imgUrl+str(cno))         # [5]책 이미지
-  
+    if search["RnoNum"] == None:   # [6]책 대출 가능한가 ( 출력이 0이면 대출정보가 없는책 / 출력이 1이면 대출이 가능한 책)
+      print("0")
+    else:
+      print("1")
+
+    if subCategory == "otb":        # [7] 책 카테고리
+      print("단행본")
+    elif subCategory =="ots":
+      print("연간물")
+    elif subCategory =="otn":
+      print("비도서")
+    elif subCategory =="ebook":
+      print("전자책")
+    elif subCategory =="otk":
+      print("힉위논문")
+    else:
+      print("정보없음")
+
 if __name__ == '__main__':
-    SearchLibraryBookPossessionPage(sys.argv[1], sys.argv[2], sys.argv[3])
+    SearchLibraryBookPossessionPage(sys.argv[1], sys.argv[2], sys.argv[3]) 
+

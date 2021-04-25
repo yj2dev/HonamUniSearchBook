@@ -11,6 +11,8 @@ let writer = [];
 let publisher = [];
 let publishYear = [];
 let cno = [];
+let isrental = [];
+let subCategory = [];
 
 const reset = () => {
   bookcount = null;
@@ -20,6 +22,8 @@ const reset = () => {
   publishYear = [];
   cno = [];
   bookimg = [];
+  isrental = [];
+  subCategory = [];
 };
 
 const convertType = (type) => {
@@ -34,7 +38,7 @@ const convertType = (type) => {
 };
 
 const putData = (data, index) => {
-  let dataindex = index % 6;
+  let dataindex = index % 8;
 
   switch (dataindex) {
     case 0:
@@ -55,6 +59,12 @@ const putData = (data, index) => {
     case 5:
       bookimg.push(data);
       break;
+    case 6:
+      isrental.push(data);
+      break;
+    case 7:
+      subCategory.push(data);
+      break;
     deafualt: break;
   }
 };
@@ -67,6 +77,8 @@ const draw = (res) => {
     publishYear: publishYear,
     cno : cno,
     bookimg: bookimg,
+    isrental : isrental,
+    subCategory : subCategory,
     previous_keyword: previous_keyword,
     bookcount: {
       value: bookcount,
@@ -78,10 +90,10 @@ router.get("/", async (req, res, next) => {
   const INPUT = req.query.keyword;
   const TYPE = req.query.option;
   const CONVERTTYPE = convertType(TYPE);
-  const PAGES = "1"     // 몇번 페이지를 볼껀지 ( 기본은 1 스크롤 할때마다 1씩 추가/ 아직못만듬 )
+  const PAGES = "1"     // 몇번 페이지를 볼껀지 ( 기본은 1 스크롤 할때마다 1씩 추가/ 만들어야함 )
   console.log("INPUT: ", INPUT);
   console.log("CONVERTTYPE: ", CONVERTTYPE);
-  console.log("PAGES",PAGES)
+  console.log("PAGES:",PAGES)
   const option = {
     mode: "text",
     pythonPath: "",
@@ -105,7 +117,7 @@ router.get("/", async (req, res, next) => {
           while (res[i] !== undefined) {
             bookcount += 1;
 
-            for (j = i; j < i + 6; j++) {
+            for (j = i; j < i + 8; j++) {
               // console.log(j);
               // console.log(res[j]);
               putData(res[j], j);
