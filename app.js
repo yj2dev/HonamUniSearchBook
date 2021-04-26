@@ -16,8 +16,8 @@ nunjucks.configure("views", {
   express: app,
   watch: true,
 });
-
 app.use("/", indexRouter);
+
 app.use("/search", searchRouter);
 
 app.listen(app.get("port"), () => {

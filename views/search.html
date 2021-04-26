@@ -11,7 +11,11 @@
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
       crossorigin="anonymous"
     />
+    
     <title>도서 도우미</title>
+
+
+
   </head>
   <body>
     <!-- Header -->
@@ -63,9 +67,8 @@
 
           {% if isrental[i] !== "0" %}
           <div class="book book__isrental">
-            <button type="submit" id="getBook">
+            <button type="submit" id="getBook" onClick="rental({{cno[i]}});">
               대출 정보
-              <div class="book book__cno">{{cno[i]}}</div>
             </button>
           </div>
           {% endif%}
@@ -80,6 +83,7 @@
       <li>3</li>
     </ul>
     <script>
+    // <script src="https://code.jquery.com/jquery-3.2.1.min.js">
       const header = document.querySelector("header");
       const bookBtn = document.querySelector("#getBook");
       let cnt = 0;
@@ -97,21 +101,23 @@
       header.addEventListener("click", () => {
         location.href = "/";
       });
-
-      console.log(bookBtn);
-      bookBtn.addEventListener("click", (e) => {
-        const BOOK_CNO = document.getElementsByClassName("book__cno").innerText;
-        console.log("BOOK_BTN");
-        console.log(BOOK_CNO);
-        // axois
-        //   .post(`/search/${BOOK_CNO}`)
+      function rental(cno){
+        console.log(cno);
+       // console.log(bookBtn);
+        // bookBtn.addEventListener("click", (e) => {
+          // const BOOK_CNO = document.getElementsByClassName("book__cno").innerText;
+          // console.log("BOOK_BTN");
+        // console.log(cno);
+        // axios
+        //   .post(`/search/${cno}`)
         //   .then(() => {
         //     console.log("load success");
         //   })
         //   .catch((err) => {
         //     console.error(err);
         //   });
-      });
+        // });
+    }
     </script>
   </body>
 </html>
