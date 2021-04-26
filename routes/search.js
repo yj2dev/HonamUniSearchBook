@@ -65,7 +65,7 @@ const putData = (data, index) => {
     case 7:
       subCategory.push(data);
       break;
-    deafualt: break;
+      deafualt: break;
   }
 };
 
@@ -75,10 +75,10 @@ const draw = (res) => {
     writer: writer,
     publisher: publisher,
     publishYear: publishYear,
-    cno : cno,
+    cno: cno,
     bookimg: bookimg,
-    isrental : isrental,
-    subCategory : subCategory,
+    isrental: isrental,
+    subCategory: subCategory,
     previous_keyword: previous_keyword,
     bookcount: {
       value: bookcount,
@@ -90,16 +90,16 @@ router.get("/", async (req, res, next) => {
   const INPUT = req.query.keyword;
   const TYPE = req.query.option;
   const CONVERTTYPE = convertType(TYPE);
-  const PAGES = "1"     // 몇번 페이지를 볼껀지 ( 기본은 1 스크롤 할때마다 1씩 추가/ 만들어야함 )
+  const PAGES = "1"; // 몇번 페이지를 볼껀지 ( 기본은 1 스크롤 할때마다 1씩 추가/ 만들어야함 )
   console.log("INPUT: ", INPUT);
   console.log("CONVERTTYPE: ", CONVERTTYPE);
-  console.log("PAGES:",PAGES)
+  console.log("PAGES:", PAGES);
   const option = {
     mode: "text",
     pythonPath: "",
     pythonOption: ["-u"],
     scriptPath: "",
-    args: [INPUT, CONVERTTYPE,PAGES],
+    args: [INPUT, CONVERTTYPE, PAGES],
   };
 
   // const processData = () => {
@@ -134,7 +134,6 @@ router.get("/", async (req, res, next) => {
       console.log("자료 개수 : ", bookcount);
       return draw(routerResponse);
     }
-
   );
   // };
   const routerResponse = res;

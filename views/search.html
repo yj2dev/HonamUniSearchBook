@@ -56,22 +56,61 @@
         </div>
         <div class="book__info">
           <div class="book book__title">{{title[i]}}({{publishYear[i]}})</div>
-          <div class="book book__writer__publisher">{{writer[i]}} | {{publisher[i]}}</div>
+          <div class="book book__writer__publisher">
+            {{writer[i]}} | {{publisher[i]}}
+          </div>
           <div class="book book__subCategory">분류 : {{subCategory[i]}}</div>
-           <!-- isrental이 1일 경우에만 토글버튼 on -->
-          <!-- <div class="book book__isrental">{{isrental[i]}}</div>  -->
+
+          {% if isrental[i] !== "0" %}
+          <div class="book book__isrental">
+            <button type="submit" id="getBook">
+              대출 정보
+              <div class="book book__cno">{{cno[i]}}</div>
+            </button>
+          </div>
+          {% endif%}
+          <!-- isrental이 1일 경우에만 토글버튼 on -->
           <!-- 토글버튼이 열린경우 cno[i]만 파이썬으로 매개변수 보내기(rentalBook.py)-->
-          <!-- <div class="book book__cno">{{cno[i]}}</div> -->
         </div>
       </div>
       {% endfor %}
     </section>
     <!-- End Result Section -->
-
+    <ul>
+      <li>3</li>
+    </ul>
     <script>
       const header = document.querySelector("header");
+      const bookBtn = document.querySelector("#getBook");
+      let cnt = 0;
+      document.addEventListener("scroll", (e) => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+          console.log("Y: ", scrollY);
+          console.log("Inner: ", innerHeight);
+          console.log("Y + Inner: ", scrollY + innerHeight);
+
+          cnt += 1;
+          console.log(cnt);
+        }
+      });
+
       header.addEventListener("click", () => {
         location.href = "/";
+      });
+
+      console.log(bookBtn);
+      bookBtn.addEventListener("click", (e) => {
+        const BOOK_CNO = document.getElementsByClassName("book__cno").innerText;
+        console.log("BOOK_BTN");
+        console.log(BOOK_CNO);
+        // axois
+        //   .post(`/search/${BOOK_CNO}`)
+        //   .then(() => {
+        //     console.log("load success");
+        //   })
+        //   .catch((err) => {
+        //     console.error(err);
+        //   });
       });
     </script>
   </body>
