@@ -33,11 +33,11 @@ def SearchRentalInfo(cno):
       
       # [ 대출가능 or 대출중 ] 상태가 아닌 도서 출력값 설정 
       if "배가중" in RnoStatus:
-        print("배가중")
+        returnPeriod = "배가중"
       elif "진로개발센터" in RnoStatus:
-        print("진로센터")
-      else:
-        print(rental["CFType"])                   # 대출 가능 여부
+        returnPeriod = "진로개발센터"
+
+      print(rental["CFType"])                   # 대출 가능 여부
       print(location)                             # 도서 정보
       print(rentaler)                             # 대출자 정보
       print(returnPeriod)                         # 도서 반납 예정일                      / 대출가능 상태일경우 빈칸으로 출력됨.(의도)
