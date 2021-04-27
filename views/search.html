@@ -63,13 +63,13 @@
           <div class="book book__subCategory">분류 : {{subCategory[i]}}</div>
 
           {% if isrental[i] !== "0" %}
-          <div class="book book__isrental"">
+          <div class="book book__isrental">
             <button type="submit" id="getBook" onClick="rental({{CNO[i]}});">
               대출 정보
             </button>
           </div>
           <div class="CNO" id="{{CNO[i]}}">
-            <table>
+            <!-- <table>
               <tr>
                 <th>현황</th>
                 <th>위치</th>
@@ -82,7 +82,7 @@
                 <td>3</td>
                 <td>4</td>
               </tr>
-            </table>
+            </table> -->
           </div>
           {% endif %}
           <!-- isrental이 1일 경우에만 토글버튼 on -->

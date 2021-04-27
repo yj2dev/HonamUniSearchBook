@@ -1,3 +1,4 @@
+const { info } = require("console");
 const express = require("express");
 const app = express();
 const router = express.Router();
@@ -93,8 +94,26 @@ const resetCNO = () => {
 };
 
 const drawCNO = (res, info) => {
-  res.send(info);
-};
+
+  res.write('<table>                \
+              <tr>                  \
+                <th>현황</th>       \
+                <th>위치</th>       \
+                <th>대출자</th>     \
+                <th>반납예정일</th> \
+              </tr>')
+              
+  for (let aa =0; aa<(info.length/4);aa++){
+    res.write('<tr>');
+      for(let bb=0;bb<(aa*4) ;bb++){
+        res.write('<td>');
+        res.write(info[bb]);
+        res.write('</td>');
+      }
+    res.write('</tr>');
+  }
+  res.end()
+}
 
 router.get("/postman/:id", async (req, res) => {
   const postCNO = req.params.id;
