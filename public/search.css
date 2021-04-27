@@ -187,24 +187,25 @@ button:focus {
 /* table */
 
 table {
-  border:2px;                 /* 안되요 ㅜㅜ */
   border-collapse: collapse;
 }
 table,
 td,
 th {
-  border: 1px solid #dedede;
+  border: 2px solid wheat;
 }
 th {
-  background-color: #ffeb9c;
   color: #a5661a;
 }
 td{
   text-align:center;
 }
-td:nth-child(2n){
-  background-color:darkgrey; /* 안되요 ㅜㅜ */
+tr:nth-child(2n){
+  background-color:#ece9e9; 
 }
-td:nth-child(2n+1){
-  background-color:white;    /* 안되요 ㅜㅜ */
+tr:nth-child(2n+1){
+  background-color:white;  
+}
+tr:first-child{
+  background-color:#ffeb9c;
 }
