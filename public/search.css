@@ -187,6 +187,7 @@ button:focus {
 /* table */
 
 table {
+  border:2px;                 /* 안되요 ㅜㅜ */
   border-collapse: collapse;
 }
 table,
@@ -197,4 +198,13 @@ th {
 th {
   background-color: #ffeb9c;
   color: #a5661a;
+}
+td{
+  text-align:center;
+}
+td:nth-child(2n){
+  background-color:darkgrey; /* 안되요 ㅜㅜ */
+}
+td:nth-child(2n+1){
+  background-color:white;    /* 안되요 ㅜㅜ */
 }
