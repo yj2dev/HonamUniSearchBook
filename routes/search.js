@@ -4,11 +4,8 @@ const router = express.Router();
 const path = require("path");
 const { PythonShell } = require("python-shell");
 
-// app.use(express.json());
-// app.use(express.urlencoded());
-// app.use(router);/
-
 let previous_keyword;
+let resultCNO = null;
 let bookcount = null;
 let bookimg = [];
 let title = [];
@@ -90,6 +87,15 @@ const draw = (res) => {
     },
   });
 };
+
+const resetCNO = () => {
+  resultCNO = null;
+};
+
+const drawCNO = (res, info) => {
+  res.send(info);
+};
+
 router.get("/postman/:id", async (req, res) => {
   const postCNO = req.params.id;
   const optionCNO = {
@@ -105,10 +111,16 @@ router.get("/postman/:id", async (req, res) => {
     (err, res) => {
       if (err) throw err;
       console.log(res);
+      resultCNO = res;
+      for (let i = 0; i < res.length; i++) {
+        console.log(res[i]);
+      }
+      drawCNO(resCNO, res);
     }
   );
-
-  res.send("대출불가능 합니다");
+  const resCNO = res;
+  console.log("resultCNO: ", resultCNO);
+  resetCNO();
 });
 
 router.get("/", async (req, res, next) => {
@@ -128,7 +140,6 @@ router.get("/", async (req, res, next) => {
     args: [INPUT, CONVERTTYPE, PAGES],
   };
 
-  // const processData = () => {
   PythonShell.run(
     path.join(__dirname, "../searchBook.py"),
     option,
@@ -142,14 +153,9 @@ router.get("/", async (req, res, next) => {
         try {
           while (res[i] !== undefined) {
             bookcount += 1;
-
             for (j = i; j < i + 8; j++) {
-              // console.log(j);
-              // console.log(res[j]);
               putData(res[j], j);
             }
-            // console.log("OUT LOOP");
-
             i = j;
           }
         } catch (error) {
@@ -161,9 +167,7 @@ router.get("/", async (req, res, next) => {
       return draw(routerResponse);
     }
   );
-  // };
   const routerResponse = res;
-  // processData();
 });
 
 module.exports = router;

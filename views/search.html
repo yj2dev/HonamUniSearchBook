@@ -69,7 +69,7 @@
             </button>
             <div class="CNO" id="{{CNO[i]}}"></div>
           </div>
-          {% endif%}
+          {% endif %}
           <!-- isrental이 1일 경우에만 토글버튼 on -->
           <!-- 토글버튼이 열린경우 cno[i]만 파이썬으로 매개변수 보내기(rentalBook.py)-->
         </div>
@@ -88,7 +88,6 @@
           console.log("Y: ", scrollY);
           console.log("Inner: ", innerHeight);
           console.log("Y + Inner: ", scrollY + innerHeight);
-
           cnt += 1;
           console.log(cnt);
         }
@@ -101,7 +100,7 @@
       function rental(cno) {
         console.log(cno);
         axios
-          .get(`/search/postman/${cno}`, { name: "AngryDuck" })
+          .get(`/search/postman/${cno}`)
           .then((res) => {
             const data = res.data;
             let isrental = document.getElementById(`${cno}`);
