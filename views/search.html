@@ -67,17 +67,34 @@
             <button type="submit" id="getBook" onClick="rental({{CNO[i]}});">
               대출 정보
             </button>
-            <div class="CNO" id="{{CNO[i]}}"></div>
+          </div>
+          <div class="CNO" id="{{CNO[i]}}">
+            <table>
+              <tr>
+                <th>현황</th>
+                <th>위치</th>
+                <th>대출자</th>
+                <th>반납예정일</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+            </table>
           </div>
           {% endif %}
           <!-- isrental이 1일 경우에만 토글버튼 on -->
           <!-- 토글버튼이 열린경우 cno[i]만 파이썬으로 매개변수 보내기(rentalBook.py)-->
+          
         </div>
       </div>
       {% endfor %}
     </section>
     <!-- End Result Section -->
 
+    
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       const header = document.querySelector("header");

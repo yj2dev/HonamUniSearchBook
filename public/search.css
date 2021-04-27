@@ -183,3 +183,18 @@ button:focus {
     border-radius: 3px;
   }
 }
+
+/* table */
+
+table {
+  border-collapse: collapse;
+}
+table,
+td,
+th {
+  border: 1px solid #dedede;
+}
+th {
+  background-color: #ffeb9c;
+  color: #a5661a;
+}
