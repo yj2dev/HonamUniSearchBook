@@ -6,6 +6,7 @@ const path = require("path");
 const { PythonShell } = require("python-shell");
 
 let previous_keyword;
+let previous_type;
 let resultCNO = null;
 let bookcount = null;
 let bookimg = [];
@@ -83,6 +84,7 @@ const draw = (res) => {
     isrental: isrental,
     subCategory: subCategory,
     previous_keyword: previous_keyword,
+    previous_type: previous_type,
     bookcount: {
       value: bookcount,
     },
@@ -95,25 +97,25 @@ const resetCNO = () => {
 
 const drawCNO = (res, info) => {
   let bb = 0;
-  res.write('<table>                \
+  res.write(
+    "<table>                \
               <tr>                  \
                 <th>현황</th>       \
                 <th>위치</th>       \
                 <th>대출자</th>     \
                 <th>반납예정일</th> \
-              </tr>');
+              </tr>"
+  );
 
-  for (let aa =0; aa<=(info.length/4);aa++){
-    res.write('<tr>');
-      for(;bb<(aa*4) ;bb++){
-        res.write('<td>');
-        res.write(info[bb]);
-        res.write('</td>');
-      }
-    res.write('</tr>');
+  for (let aa = 0; aa <= info.length / 4; aa++) {
+    res.write("<tr>");
+    for (; bb < aa * 4; bb++) {
+      res.write(`<td>${info[bb]}</td>`);
+    }
+    res.write("</tr>");
   }
-  res.end()
-}
+  res.end();
+};
 
 router.get("/postman/:id", async (req, res) => {
   const postCNO = req.params.id;
@@ -144,6 +146,7 @@ router.get("/postman/:id", async (req, res) => {
 
 router.get("/", async (req, res, next) => {
   previous_keyword = req.query.keyword;
+  previous_type = req.query.option;
   const INPUT = req.query.keyword;
   const TYPE = req.query.option;
   const CONVERTTYPE = convertType(TYPE);

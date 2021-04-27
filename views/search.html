@@ -33,6 +33,7 @@
           </select>
           <i class="fas fa-caret-down"></i>
         </div>
+        <div id="previous_type">{{previous_type}}</div>
 
         <input
           type="text"
@@ -87,19 +88,23 @@
           {% endif %}
           <!-- isrental이 1일 경우에만 토글버튼 on -->
           <!-- 토글버튼이 열린경우 cno[i]만 파이썬으로 매개변수 보내기(rentalBook.py)-->
-          
         </div>
       </div>
       {% endfor %}
     </section>
     <!-- End Result Section -->
 
-    
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       const header = document.querySelector("header");
       const bookBtn = document.querySelector("#getBook");
+      const selectList = document.querySelector(".selectList");
+      const previous_type = document.querySelector("#previous_type");
+
       let cnt = 0;
+
+      selectList.value = previous_type.textContent;
+
       document.addEventListener("scroll", (e) => {
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
           console.log("Y: ", scrollY);

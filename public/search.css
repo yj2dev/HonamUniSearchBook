@@ -197,15 +197,23 @@ th {
 th {
   color: #a5661a;
 }
-td{
-  text-align:center;
+td {
+  text-align: center;
 }
-tr:nth-child(2n){
-  background-color:#ece9e9; 
+tr:nth-child(2n) {
+  background-color: #ece9e9;
 }
-tr:nth-child(2n+1){
-  background-color:white;  
+tr:nth-child(2n + 1) {
+  background-color: white;
 }
-tr:first-child{
-  background-color:#ffeb9c;
+tr:first-child {
+  background-color: #ffeb9c;
+}
+
+/* Hidden Tags */
+.CNO {
+  /* display: none; */
+}
+#previous_type {
+  display: none;
 }
