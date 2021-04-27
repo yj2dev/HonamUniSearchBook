@@ -94,7 +94,7 @@ const resetCNO = () => {
 };
 
 const drawCNO = (res, info) => {
-
+  let bb = 0;
   res.write('<table>                \
               <tr>                  \
                 <th>현황</th>       \
@@ -103,9 +103,9 @@ const drawCNO = (res, info) => {
                 <th>반납예정일</th> \
               </tr>');
 
-  for (let aa =0; aa<(info.length/4);aa++){
+  for (let aa =0; aa<=(info.length/4);aa++){
     res.write('<tr>');
-      for(let bb=0;bb<(aa*4) ;bb++){
+      for(;bb<(aa*4) ;bb++){
         res.write('<td>');
         res.write(info[bb]);
         res.write('</td>');
