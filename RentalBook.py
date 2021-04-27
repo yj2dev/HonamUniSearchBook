@@ -46,6 +46,4 @@ def SearchRentalInfo(cno):
     print("NULL")
 
 if __name__ == '__main__':
-  SearchRentalInfo("492936")
-  SearchRentalInfo("500791")
-  # SearchRentalInfo(sys.argv[1])
+  SearchRentalInfo(sys.argv[1])
