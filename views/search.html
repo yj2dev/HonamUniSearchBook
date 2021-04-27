@@ -101,14 +101,14 @@
       function rental(cno) {
         console.log(cno);
         axios
-          .post("/search/postman", { name: "AngryDuck" })
+          .get(`/search/postman/${cno}`, { name: "AngryDuck" })
           .then((res) => {
             const data = res.data;
             let isrental = document.getElementById(`${cno}`);
-            console.log(isrental);
+            console.log("isrental : ", isrental);
             isrental.innerHTML = data;
-            console.log(cno);
-            console.log(data);
+            console.log("cno : ", cno);
+            console.log("data : ", data);
             console.log("load success");
           })
           .catch((err) => {

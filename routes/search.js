@@ -4,9 +4,9 @@ const router = express.Router();
 const path = require("path");
 const { PythonShell } = require("python-shell");
 
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(router);
+// app.use(express.json());
+// app.use(express.urlencoded());
+// app.use(router);/
 
 let previous_keyword;
 let bookcount = null;
@@ -18,7 +18,6 @@ let publishYear = [];
 let CNO = [];
 let isrental = [];
 let subCategory = [];
-let INDEX = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const reset = () => {
   bookcount = null;
@@ -86,14 +85,13 @@ const draw = (res) => {
     isrental: isrental,
     subCategory: subCategory,
     previous_keyword: previous_keyword,
-    INDEX: INDEX,
     bookcount: {
       value: bookcount,
     },
   });
 };
-router.post("/postman", (req, res) => {
-  const postCNO = 492720;
+router.get("/postman/:id", async (req, res) => {
+  const postCNO = req.params.id;
   const optionCNO = {
     mode: "text",
     pythonPath: "",
@@ -101,9 +99,6 @@ router.post("/postman", (req, res) => {
     scriptPath: "",
     args: [postCNO],
   };
-  console.log("RES.Data: ", res.data);
-  console.log("REQ.Data: ", req.data);
-  console.log("RES.Data: ", req.params.data);
   PythonShell.run(
     path.join(__dirname, "../RentalBook.py"),
     optionCNO,

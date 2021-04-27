@@ -100,7 +100,7 @@ header i {
   padding: 20px;
 }
 .CNO {
-  display: none;
+  /* display: none; */
 }
 select:focus {
   outline: none;
