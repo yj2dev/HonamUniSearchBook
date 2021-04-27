@@ -11,11 +11,8 @@
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
       crossorigin="anonymous"
     />
-    
+
     <title>도서 도우미</title>
-
-
-
   </head>
   <body>
     <!-- Header -->
@@ -66,10 +63,11 @@
           <div class="book book__subCategory">분류 : {{subCategory[i]}}</div>
 
           {% if isrental[i] !== "0" %}
-          <div class="book book__isrental">
-            <button type="submit" id="getBook" onClick="rental({{cno[i]}});">
+          <div class="book book__isrental"">
+            <button type="submit" id="getBook" onClick="rental({{CNO[i]}});">
               대출 정보
             </button>
+            <div class="CNO" id="{{CNO[i]}}"></div>
           </div>
           {% endif%}
           <!-- isrental이 1일 경우에만 토글버튼 on -->
@@ -79,11 +77,9 @@
       {% endfor %}
     </section>
     <!-- End Result Section -->
-    <ul>
-      <li>3</li>
-    </ul>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-    // <script src="https://code.jquery.com/jquery-3.2.1.min.js">
       const header = document.querySelector("header");
       const bookBtn = document.querySelector("#getBook");
       let cnt = 0;
@@ -101,23 +97,24 @@
       header.addEventListener("click", () => {
         location.href = "/";
       });
-      function rental(cno){
+
+      function rental(cno) {
         console.log(cno);
-       // console.log(bookBtn);
-        // bookBtn.addEventListener("click", (e) => {
-          // const BOOK_CNO = document.getElementsByClassName("book__cno").innerText;
-          // console.log("BOOK_BTN");
-        // console.log(cno);
-        // axios
-        //   .post(`/search/${cno}`)
-        //   .then(() => {
-        //     console.log("load success");
-        //   })
-        //   .catch((err) => {
-        //     console.error(err);
-        //   });
-        // });
-    }
+        axios
+          .post("/search/postman", { name: "AngryDuck" })
+          .then((res) => {
+            const data = res.data;
+            let isrental = document.getElementById(`${cno}`);
+            console.log(isrental);
+            isrental.innerHTML = data;
+            console.log(cno);
+            console.log(data);
+            console.log("load success");
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
     </script>
   </body>
 </html>

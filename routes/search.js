@@ -1,7 +1,12 @@
 const express = require("express");
+const app = express();
 const router = express.Router();
 const path = require("path");
 const { PythonShell } = require("python-shell");
+
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(router);
 
 let previous_keyword;
 let bookcount = null;
@@ -10,9 +15,10 @@ let title = [];
 let writer = [];
 let publisher = [];
 let publishYear = [];
-let cno = [];
+let CNO = [];
 let isrental = [];
 let subCategory = [];
+let INDEX = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const reset = () => {
   bookcount = null;
@@ -20,7 +26,7 @@ const reset = () => {
   writer = [];
   publisher = [];
   publishYear = [];
-  cno = [];
+  CNO = [];
   bookimg = [];
   isrental = [];
   subCategory = [];
@@ -54,7 +60,7 @@ const putData = (data, index) => {
       publishYear.push(data);
       break;
     case 4:
-      cno.push(data);
+      CNO.push(data);
       break;
     case 5:
       bookimg.push(data);
@@ -75,16 +81,41 @@ const draw = (res) => {
     writer: writer,
     publisher: publisher,
     publishYear: publishYear,
-    cno: cno,
+    CNO: CNO,
     bookimg: bookimg,
     isrental: isrental,
     subCategory: subCategory,
     previous_keyword: previous_keyword,
+    INDEX: INDEX,
     bookcount: {
       value: bookcount,
     },
   });
 };
+router.post("/postman", (req, res) => {
+  const postCNO = 492720;
+  const optionCNO = {
+    mode: "text",
+    pythonPath: "",
+    pythonOption: ["-u"],
+    scriptPath: "",
+    args: [postCNO],
+  };
+  console.log("RES.Data: ", res.data);
+  console.log("REQ.Data: ", req.data);
+  console.log("RES.Data: ", req.params.data);
+  PythonShell.run(
+    path.join(__dirname, "../RentalBook.py"),
+    optionCNO,
+    (err, res) => {
+      if (err) throw err;
+      console.log(res);
+    }
+  );
+
+  res.send("대출불가능 합니다");
+});
+
 router.get("/", async (req, res, next) => {
   previous_keyword = req.query.keyword;
   const INPUT = req.query.keyword;

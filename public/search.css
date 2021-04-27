@@ -99,6 +99,9 @@ header i {
   border: none;
   padding: 20px;
 }
+.CNO {
+  display: none;
+}
 select:focus {
   outline: none;
 }
