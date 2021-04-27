@@ -52,43 +52,34 @@
     <!-- Result Section -->
     <section id="result">
       {% for i in range(0, bookcount.value) %}
-      <div class="result__book">
-        <div class="book__img">
-          <img src="{{bookimg[i]}}" width="80" height="120" />
-        </div>
-        <div class="book__info">
-          <div class="book book__title">{{title[i]}}({{publishYear[i]}})</div>
-          <div class="book book__writer__publisher">
-            {{writer[i]}} | {{publisher[i]}}
+      <div class="result result__book">
+        <div class="result result__contaier">
+          <div class="book__img">
+            <img src="{{bookimg[i]}}" width="80" height="120" />
           </div>
-          <div class="book book__subCategory">분류 : {{subCategory[i]}}</div>
+          <div class="book__info">
+            <div class="book book__title">{{title[i]}}({{publishYear[i]}})</div>
+            <div class="book book__writer__publisher">
+              {{writer[i]}} | {{publisher[i]}}
+            </div>
+            <div class="book book__subCategory">분류 : {{subCategory[i]}}</div>
 
-          {% if isrental[i] !== "0" %}
-          <div class="book book__isrental">
-            <button type="submit" id="getBook" onClick="rental({{CNO[i]}});">
-              대출 정보
-            </button>
+            {% if isrental[i] !== "0" %}
+            <div class="book book__isrental">
+              <button type="submit" id="getBook" onClick="rental({{CNO[i]}});">
+                대출 정보
+              </button>
+            </div>
+            <div class="CNO" id="{{CNO[i]}}"></div>
+            {% endif %}
           </div>
-          <div class="CNO" id="{{CNO[i]}}">
-            <!-- <table>
-              <tr>
-                <th>현황</th>
-                <th>위치</th>
-                <th>대출자</th>
-                <th>반납예정일</th>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-              </tr>
-            </table> -->
-          </div>
-          {% endif %}
-          <!-- isrental이 1일 경우에만 토글버튼 on -->
-          <!-- 토글버튼이 열린경우 cno[i]만 파이썬으로 매개변수 보내기(rentalBook.py)-->
+          <!-- result__contaier -->
         </div>
+        {% if isrental[i] !== "0" %}
+        <div id="drawtable" class="{{CNO[i]}}"></div>
+        {% endif %}
+
+        <!-- result__book -->
       </div>
       {% endfor %}
     </section>
@@ -125,9 +116,21 @@
           .get(`/search/postman/${cno}`)
           .then((res) => {
             const data = res.data;
-            let isrental = document.getElementById(`${cno}`);
+            const isrental = document.getElementById(`${cno}`);
+            const drawtable = document.getElementsByClassName(`${cno}`)[0];
+            const rentalBtn = document.querySelector("#getBook");
+
+            if (rentalBtn.innerText === "대출 정보") {
+              rentalBtn.innerText = "숨기기";
+              drawtable.classList.remove("hidden");
+              drawtable.innerHTML = data;
+            } else {
+              rentalBtn.innerText = "대출 정보";
+              drawtable.classList.add("hidden");
+            }
+            console.log("rentalBtn: ", rentalBtn);
             console.log("isrental : ", isrental);
-            isrental.innerHTML = data;
+            console.log("drawtable : ", drawtable);
             console.log("cno : ", cno);
             console.log("data : ", data);
             console.log("load success");

@@ -122,6 +122,7 @@ button:focus {
   padding: 10px;
   margin: 20px;
   display: flex;
+  flex-direction: column;
 }
 
 .book {
@@ -141,6 +142,18 @@ button:focus {
 
 .result__book img {
   padding: 5px 30px 5px 5px;
+}
+
+.result__contaier {
+  display: flex;
+  flex-direction: row;
+}
+#drawtable {
+  margin: 0 0 0 5px;
+}
+
+.hidden {
+  display: none;
 }
 
 /* End Result Section */
@@ -196,8 +209,12 @@ th {
 }
 th {
   color: #a5661a;
+  padding: 0 10px;
 }
 td {
+  padding: 0 10px;
+}
+tr {
   text-align: center;
 }
 tr:nth-child(2n) {
