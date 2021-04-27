@@ -101,8 +101,8 @@ const drawCNO = (res, info) => {
                 <th>위치</th>       \
                 <th>대출자</th>     \
                 <th>반납예정일</th> \
-              </tr>')
-              
+              </tr>');
+
   for (let aa =0; aa<(info.length/4);aa++){
     res.write('<tr>');
       for(let bb=0;bb<(aa*4) ;bb++){
