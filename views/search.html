@@ -66,7 +66,11 @@
 
             {% if isrental[i] !== "0" %}
             <div class="book book__isrental">
-              <button type="submit" id="getBook" onClick="rental({{CNO[i]}});">
+              <button
+                type="submit"
+                id="getBook{{CNO[i]}}"
+                onClick="rental({{CNO[i]}});"
+              >
                 대출 정보
               </button>
             </div>
@@ -88,7 +92,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       const header = document.querySelector("header");
-      const bookBtn = document.querySelector("#getBook");
       const selectList = document.querySelector(".selectList");
       const previous_type = document.querySelector("#previous_type");
 
@@ -118,22 +121,21 @@
             const data = res.data;
             const isrental = document.getElementById(`${cno}`);
             const drawtable = document.getElementsByClassName(`${cno}`)[0];
-            const rentalBtn = document.querySelector("#getBook");
+            const rentalInfoBtn = document.getElementById(`getBook${cno}`);
 
-            if (rentalBtn.innerText === "대출 정보") {
-              rentalBtn.innerText = "숨기기";
+            if (rentalInfoBtn.innerText === "대출 정보") {
+              rentalInfoBtn.innerText = "숨기기";
               drawtable.classList.remove("hidden");
               drawtable.innerHTML = data;
             } else {
-              rentalBtn.innerText = "대출 정보";
+              rentalInfoBtn.innerText = "대출 정보";
               drawtable.classList.add("hidden");
             }
-            console.log("rentalBtn: ", rentalBtn);
-            console.log("isrental : ", isrental);
-            console.log("drawtable : ", drawtable);
-            console.log("cno : ", cno);
-            console.log("data : ", data);
-            console.log("load success");
+            // console.log("isrental : ", isrental);
+            // console.log("drawtable : ", drawtable);
+            // console.log("cno : ", cno);
+            // console.log("data : ", data);
+            // console.log("load success");
           })
           .catch((err) => {
             console.error(err);
