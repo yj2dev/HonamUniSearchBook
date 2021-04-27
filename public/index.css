@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 body {
-  background-color: #a598ee;
+  background-color: #0984e3;
   padding: 0px;
   margin: 0px;
   height: 100vh;
@@ -19,7 +19,7 @@ header {
   color: #fff;
   display: flex;
   position: relative;
-  bottom: 120px;
+  bottom: 50px;
   font-size: 5vw;
   transition: all ease 0.5s;
   cursor: pointer;
