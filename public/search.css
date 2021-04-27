@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 body {
-  background-color: #a598ee;
+  background-color: #0984e3;
   padding: 0px;
   margin: 0 0px;
   height: 100vh;
@@ -154,6 +154,15 @@ button:focus {
 
 .hidden {
   display: none;
+}
+
+.book button {
+  background-color: #0984e3;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  padding: 3px 10px;
+  font-size: 1.1em;
 }
 
 /* End Result Section */
