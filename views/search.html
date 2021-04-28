@@ -127,14 +127,16 @@
       const previous_keyword = document.querySelector(".previous_keyword");
       const input = document.querySelector("#search input");
       const currentpage = document.querySelector("#currentPage");
+      const ispage = document.getElementById(
+        `pagingindex${currentpage.innerText}`
+      );
       const drawactive = () => {
-        document.getElementById(
-          `pagingindex${currentpage.innerText}`
-        ).style.background = "#d35400";
+        ispage.style.background = "#d35400";
       };
       selectList.value = previous_type.textContent;
 
-      if (document.querySelector("#pagingindex1") !== null) {
+      if (ispage !== null) {
+        console.log("DRAW");
         drawactive();
       }
 
