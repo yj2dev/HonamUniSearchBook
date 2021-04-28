@@ -17,8 +17,10 @@ let publishYear = [];
 let CNO = [];
 let isrental = [];
 let subCategory = [];
+let pagingArr = [];
 let totalPages = 0;
 let currentPage = 1;
+let PAGES = 1;
 
 const reset = () => {
   bookcount = null;
@@ -32,6 +34,7 @@ const reset = () => {
   subCategory = [];
   totalPages = 0;
   currentPage = 1;
+  pagingArr = [];
 };
 
 const convertType = (type) => {
@@ -97,6 +100,7 @@ const draw = (res) => {
     currentPage: currentPage,
     previous_keyword: previous_keyword,
     previous_type: previous_type,
+    pagingArr: pagingArr,
     bookcount: {
       value: bookcount,
     },
@@ -129,6 +133,34 @@ const drawCNO = (res, info) => {
   res.end();
 };
 
+const distribute = (total, current) => {
+  const pagingCnt = 5;
+  const half = Math.floor(pagingCnt / 2);
+  const arr = [];
+  let L = current - half;
+  let R = current + half;
+  console.log("half: ", half);
+  console.log("L, R: ", L, R);
+  console.log("ARR: ", arr);
+  console.log("total: ", total, "current: ", current);
+
+  if (L < 1) {
+    R += Math.abs(L) + 1;
+    L = 1;
+  }
+
+  if (R > total) {
+    L -= R - total;
+    R = total;
+  }
+  console.log("L, R: ", L, R);
+  for (let i = L; i <= R; i++) {
+    arr.push(i);
+  }
+  console.log("ARR: ", arr);
+  return arr;
+};
+
 router.get("/postman/:id", async (req, res) => {
   const postCNO = req.params.id;
   const optionCNO = {
@@ -159,10 +191,10 @@ router.get("/postman/:id", async (req, res) => {
 router.get("/", async (req, res, next) => {
   previous_keyword = req.query.keyword;
   previous_type = req.query.option;
+  PAGES = req.query.page;
   const INPUT = req.query.keyword;
   const TYPE = req.query.option;
   const CONVERTTYPE = convertType(TYPE);
-  const PAGES = "1"; // 몇번 페이지를 볼껀지 ( 기본은 1 스크롤 할때마다 1씩 추가/ 만들어야함 )
   console.log("INPUT: ", INPUT);
   console.log("CONVERTTYPE: ", CONVERTTYPE);
   console.log("PAGES:", PAGES);
@@ -198,6 +230,11 @@ router.get("/", async (req, res, next) => {
       }
       console.log(":: END LOOP");
       console.log("자료 개수 : ", bookcount);
+      console.log("totalPages: ", totalPages);
+      console.log("PAGES: ", PAGES);
+
+      pagingArr = distribute(totalPages, PAGES);
+      console.log("pagingArr: ", pagingArr);
       return draw(routerResponse);
     }
   );

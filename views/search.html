@@ -24,7 +24,7 @@
 
     <!-- Search Section -->
     <section id="search">
-      <form action="/search">
+      <form action="/search" method="GET">
         <div class="selectBox">
           <select class="selectList" name="option">
             <option>도서명</option>
@@ -49,6 +49,16 @@
     <!-- End Search Section -->
 
     <!-- Result Section -->
+    {{totalPages}} {{currentPage}}
+    <br />
+    {% for i in pagingArr %}
+    <form action="/search" method="GET">
+      <input type="hidden" name="option" value="{{previous_type}}" />
+      <input type="hidden" name="keyword" value="{{previous_keyword}}" />
+      <button type="submit" name="page" value="{{i}}">{{i}}</button>
+    </form>
+
+    {% endfor %}
     <section id="result">
       {% for i in range(0, bookcount.value) %}
       <div class="result result__book">
@@ -87,6 +97,9 @@
         <!-- result__book -->
       </div>
       {% endfor %}
+      <!-- Paging Section -->
+
+      <!-- End Paging Section -->
     </section>
     <!-- End Result Section -->
 
@@ -98,19 +111,7 @@
       const input = document.querySelector("#search input");
       console.log(input); // 템플릿엔진 변수 사용안하고 값을 받아와서 넣어줄 예정 => 커서를 뒤로 보내주기 위해
 
-      let cnt = 0;
-
       selectList.value = previous_type.textContent;
-
-      document.addEventListener("scroll", (e) => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-          console.log("Y: ", scrollY);
-          console.log("Inner: ", innerHeight);
-          console.log("Y + Inner: ", scrollY + innerHeight);
-          cnt += 1;
-          console.log(cnt);
-        }
-      });
 
       header.addEventListener("click", () => {
         location.href = "/";
