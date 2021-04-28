@@ -118,31 +118,25 @@
 
       function rental(cno) {
         console.log(cno);
-        axios
-          .get(`/search/postman/${cno}`)
-          .then((res) => {
-            const data = res.data;
-            const isrental = document.getElementById(`${cno}`);
-            const drawtable = document.getElementsByClassName(`${cno}`)[0];
-            const rentalInfoBtn = document.getElementById(`getBook${cno}`);
-
-            if (rentalInfoBtn.innerText === "대출 정보") {
+        const isrental = document.getElementById(`${cno}`);
+        const drawtable = document.getElementsByClassName(`${cno}`)[0];
+        const rentalInfoBtn = document.getElementById(`getBook${cno}`);
+        if (rentalInfoBtn.innerText === "대출 정보") {
+          axios
+            .get(`/search/postman/${cno}`)
+            .then((res) => {
+              const data = res.data;
               rentalInfoBtn.innerText = "숨기기";
               drawtable.classList.remove("hidden");
               drawtable.innerHTML = data;
-            } else {
-              rentalInfoBtn.innerText = "대출 정보";
-              drawtable.classList.add("hidden");
-            }
-            // console.log("isrental : ", isrental);
-            // console.log("drawtable : ", drawtable);
-            // console.log("cno : ", cno);
-            // console.log("data : ", data);
-            // console.log("load success");
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        } else {
+          rentalInfoBtn.innerText = "대출 정보";
+          drawtable.classList.add("hidden");
+        }
       }
     </script>
   </body>
