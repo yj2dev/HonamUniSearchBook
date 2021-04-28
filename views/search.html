@@ -41,6 +41,7 @@
           placeholder="키워드를 입력하세요."
           value="{{previous_keyword}}"
         />
+        <input type="hidden" name="page" value="1" />
         <button type="submit">
           <i class="fas fa-search"></i>
         </button>
@@ -51,14 +52,17 @@
     <!-- Result Section -->
     {{totalPages}} {{currentPage}}
     <br />
-    {% for i in pagingArr %}
-    <form action="/search" method="GET">
-      <input type="hidden" name="option" value="{{previous_type}}" />
-      <input type="hidden" name="keyword" value="{{previous_keyword}}" />
-      <button type="submit" name="page" value="{{i}}">{{i}}</button>
-    </form>
+    <div class="paging__container">
+      {% for i in pagingArr %}
+      <form action="/search" method="GET">
+        <input type="hidden" name="option" value="{{previous_type}}" />
+        <input type="hidden" name="keyword" value="{{previous_keyword}}" />
+        <button type="submit" name="page" value="{{i}}">{{i}}</button>
+      </form>
 
-    {% endfor %}
+      {% endfor %}
+    </div>
+
     <section id="result">
       {% for i in range(0, bookcount.value) %}
       <div class="result result__book">

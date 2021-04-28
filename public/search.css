@@ -178,8 +178,16 @@ button:focus {
   font-size: 14px;
   width: 90px;
 }
-
 /* End Result Section */
+
+/* Paging Section */
+.paging__container {
+  display: flex;
+}
+.paging__container button {
+  border-radius: 5px;
+}
+/* End Paging Section */
 
 @media screen and (max-width: 720px) {
   header {

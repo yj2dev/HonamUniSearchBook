@@ -1,5 +1,5 @@
 const distribute = (total, current) => {
-  const pagingCnt = 5;
+  const pagingCnt = 10;
   const half = Math.floor(pagingCnt / 2);
   const pagingList = [];
   let L = current - half;
@@ -24,3 +24,4 @@ const distribute = (total, current) => {
 for (let i = -3; i < 30; i++) {
   console.log(distribute(29, i), i);
 }
+console.log(distribute(2, 1));
