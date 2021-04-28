@@ -96,6 +96,7 @@
       </div>
       <br />
       <div class="paging__container">
+        <div class="__space__"></div>
         {% for i in pagingArr %}
         <form action="/search" method="GET">
           <input type="hidden" name="option" value="{{previous_type}}" />
@@ -104,8 +105,8 @@
             {{i}}
           </button>
         </form>
-
         {% endfor %}
+        <div class="__space__"></div>
       </div>
       <!-- End Paging Section -->
     </section>
@@ -131,7 +132,7 @@
         `pagingindex${currentpage.innerText}`
       );
       const drawactive = () => {
-        ispage.style.background = "#d35400";
+        ispage.style.color = "#d35400";
       };
       selectList.value = previous_type.textContent;
 

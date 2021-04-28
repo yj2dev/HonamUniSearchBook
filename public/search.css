@@ -123,6 +123,7 @@ button:focus {
   margin: 20px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 15px #555555;
 }
 
 .book {
@@ -187,13 +188,16 @@ button:focus {
 }
 .paging__container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+}
+.__space__ {
+  flex: 5;
 }
 .paging__container button {
+  flex: 1;
   border: 0px solid #0984e3;
   background-color: #0984e3;
-  margin: 0 3px;
-  padding: 1em;
+  /* padding: 1em; */
   border-radius: 3px;
   font-size: 1.2em;
   color: #fff;
