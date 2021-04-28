@@ -17,6 +17,8 @@ let publishYear = [];
 let CNO = [];
 let isrental = [];
 let subCategory = [];
+let totalPages = [];
+let currentPage = [];
 
 const reset = () => {
   bookcount = null;
@@ -28,6 +30,8 @@ const reset = () => {
   bookimg = [];
   isrental = [];
   subCategory = [];
+  totalPages = 0;
+  currentPage = 1;
 };
 
 const convertType = (type) => {
@@ -42,7 +46,7 @@ const convertType = (type) => {
 };
 
 const putData = (data, index) => {
-  let dataindex = index % 8;
+  let dataindex = index % 10;
 
   switch (dataindex) {
     case 0:
@@ -69,6 +73,12 @@ const putData = (data, index) => {
     case 7:
       subCategory.push(data);
       break;
+    case 8:
+      totalPages = data;
+      break;
+    case 9:
+      currentPage = data;
+      break;
       deafualt: break;
   }
 };
@@ -83,6 +93,8 @@ const draw = (res) => {
     bookimg: bookimg,
     isrental: isrental,
     subCategory: subCategory,
+    totalPages: totalPages,
+    currentPage: currentPage,
     previous_keyword: previous_keyword,
     previous_type: previous_type,
     bookcount: {
@@ -175,7 +187,7 @@ router.get("/", async (req, res, next) => {
         try {
           while (res[i] !== undefined) {
             bookcount += 1;
-            for (j = i; j < i + 8; j++) {
+            for (j = i; j < i + 10; j++) {
               putData(res[j], j);
             }
             i = j;

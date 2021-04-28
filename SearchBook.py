@@ -26,7 +26,9 @@ def SearchLibraryBookPossessionPage(bookTitle, searchType,sp):
   # [에러처리]검색한 페이지에 자료가 없을경우 NULL 출력
   if len(req["ListItem"]["BasicItem"]) < 1:
     print("NULL")
-  
+  else:
+    totalPages = req["PagingInfo"]["TotalPages"]        # 총 페이지 수
+    currentPage = req["PagingInfo"]["CurrentPage"]      # 호출된 페이지 넘버
   # 해당 페이지에 있는 책 정보를 출력
   for search in req["ListItem"]["BasicItem"]:
     cno = search["Cno"]   
@@ -54,7 +56,8 @@ def SearchLibraryBookPossessionPage(bookTitle, searchType,sp):
       print("힉위논문")
     else:
       print("정보없음")
-
+    print(totalPages)
+    print(currentPage)
 if __name__ == '__main__':
     SearchLibraryBookPossessionPage(sys.argv[1], sys.argv[2], sys.argv[3]) 
 
