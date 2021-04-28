@@ -134,11 +134,15 @@ const drawCNO = (res, info) => {
 };
 
 const distribute = (total, current) => {
-  const pagingCnt = 5;
+  const pagingCnt = 7;
   const half = Math.floor(pagingCnt / 2);
   const arr = [];
+  current = parseInt(current);
   let L = current - half;
+  console.log("===current, half : ", current, half);
   let R = current + half;
+  console.log("===current, half : ", current, half);
+  console.log("Add R", current + half);
   console.log("half: ", half);
   console.log("L, R: ", L, R);
   console.log("ARR: ", arr);
