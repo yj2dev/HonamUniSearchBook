@@ -168,6 +168,7 @@ button:focus {
 .book button:hover {
   cursor: pointer;
   color: #ffeb9c;
+  cursor: pointer;
 }
 #impossible__btn {
   background-color: #d63031;
@@ -181,13 +182,40 @@ button:focus {
 /* End Result Section */
 
 /* Paging Section */
+.hidden {
+  display: none;
+}
 .paging__container {
   display: flex;
+  justify-content: center;
 }
 .paging__container button {
-  border-radius: 5px;
+  border: 0px solid #0984e3;
+  background-color: #0984e3;
+  margin: 0 3px;
+  padding: 1em;
+  border-radius: 3px;
+  font-size: 1.2em;
+  color: #fff;
+}
+.paging__container button:hover {
+  background-color: #d35400;
 }
 /* End Paging Section */
+/* Function */
+.scrolldown__icon {
+  color: #50c058;
+  font-size: 4em;
+  position: fixed;
+  top: 75%;
+  display: none;
+}
+
+.scrolldown__icon:hover {
+  cursor: pointer;
+  color: #009432;
+}
+/* End Function */
 
 @media screen and (max-width: 720px) {
   header {
@@ -258,10 +286,16 @@ tr:first-child {
   background-color: #ffeb9c;
 }
 
-/* Hidden Tags */
-.CNO {
-  /* display: none; */
+/* Footer */
+footer .footer__container {
+  margin: 50px;
 }
+/* End Footer */
+
+/* Hidden Tags */
 #previous_type {
+  display: none;
+}
+.previous_keyword {
   display: none;
 }

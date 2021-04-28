@@ -134,7 +134,7 @@ const drawCNO = (res, info) => {
 };
 
 const distribute = (total, current) => {
-  const pagingCnt = 10;
+  const pagingCnt = 9;
   const half = Math.floor(pagingCnt / 2);
   const arr = [];
   current = parseInt(current);
@@ -159,6 +159,8 @@ const distribute = (total, current) => {
     L -= R - total;
     R = total;
   }
+  L = L < 1 ? 1 : L;
+
   console.log("L, R: ", L, R);
   for (let i = L; i <= R; i++) {
     arr.push(i);

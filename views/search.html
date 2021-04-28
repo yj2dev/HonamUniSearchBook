@@ -35,11 +35,12 @@
         </div>
         <div id="previous_type">{{previous_type}}</div>
 
+        <div class="previous_keyword">{{previous_keyword}}</div>
         <input
           type="text"
           name="keyword"
           placeholder="키워드를 입력하세요."
-          value="{{previous_keyword}}"
+          value=""
         />
         <input type="hidden" name="page" value="1" />
         <button type="submit">
@@ -50,19 +51,6 @@
     <!-- End Search Section -->
 
     <!-- Result Section -->
-    {{totalPages}} {{currentPage}}
-    <br />
-    <div class="paging__container">
-      {% for i in pagingArr %}
-      <form action="/search" method="GET">
-        <input type="hidden" name="option" value="{{previous_type}}" />
-        <input type="hidden" name="keyword" value="{{previous_keyword}}" />
-        <button type="submit" name="page" value="{{i}}">{{i}}</button>
-      </form>
-
-      {% endfor %}
-    </div>
-
     <section id="result">
       {% for i in range(0, bookcount.value) %}
       <div class="result result__book">
@@ -102,27 +90,64 @@
       </div>
       {% endfor %}
       <!-- Paging Section -->
+      <div class="hidden">
+        <div id="totalPages">{{totalPages}}</div>
+        <div id="currentPage">{{currentPage}}</div>
+      </div>
+      <br />
+      <div class="paging__container">
+        {% for i in pagingArr %}
+        <form action="/search" method="GET">
+          <input type="hidden" name="option" value="{{previous_type}}" />
+          <input type="hidden" name="keyword" value="{{previous_keyword}}" />
+          <button type="submit" id="pagingindex{{i}}" name="page" value="{{i}}">
+            {{i}}
+          </button>
+        </form>
 
+        {% endfor %}
+      </div>
       <!-- End Paging Section -->
     </section>
     <!-- End Result Section -->
+    <!-- Footer -->
+    <footer>
+      <div class="footer__container"></div>
+    </footer>
+    <!-- End Footer -->
 
+    <!-- Function -->
+    <div class="scrolldown__icon"><i class="fas fa-chevron-down"></i></div>
+    <!-- End Function -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       const header = document.querySelector("header");
       const selectList = document.querySelector(".selectList");
       const previous_type = document.querySelector("#previous_type");
+      const previous_keyword = document.querySelector(".previous_keyword");
       const input = document.querySelector("#search input");
-      console.log(input); // 템플릿엔진 변수 사용안하고 값을 받아와서 넣어줄 예정 => 커서를 뒤로 보내주기 위해
-
+      const currentpage = document.querySelector("#currentPage");
+      const drawactive = () => {
+        document.getElementById(
+          `pagingindex${currentpage.innerText}`
+        ).style.background = "#d35400";
+      };
       selectList.value = previous_type.textContent;
+
+      if (document.querySelector("#pagingindex1") !== null) {
+        drawactive();
+      }
+
+      setTimeout(() => {
+        input.value = previous_keyword.innerText;
+        input.focus();
+      }, 0);
 
       header.addEventListener("click", () => {
         location.href = "/";
       });
 
       function rental(cno) {
-        console.log(cno);
         const isrental = document.getElementById(`${cno}`);
         const drawtable = document.getElementsByClassName(`${cno}`)[0];
         const rentalInfoBtn = document.getElementById(`getBook${cno}`);
@@ -143,6 +168,27 @@
           drawtable.classList.add("hidden");
         }
       }
+
+      const downicon = document.querySelector(".scrolldown__icon");
+      let previousScrollY;
+      document.addEventListener("scroll", (e) => {
+        let nowScrollY = scrollY;
+        if (nowScrollY > previousScrollY) {
+          // console.log("down Scroll");
+          downicon.style.display = "inline";
+        } else {
+          // console.log("up Scroll");
+          downicon.style.display = "none";
+        }
+        previousScrollY = scrollY;
+      });
+
+      downicon.addEventListener("click", () => {
+        scrollTo(0, 9999_9999);
+        setTimeout(() => {
+          downicon.style.display = "none";
+        }, 0);
+      });
     </script>
   </body>
 </html>
