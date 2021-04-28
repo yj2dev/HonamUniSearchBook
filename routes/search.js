@@ -17,8 +17,8 @@ let publishYear = [];
 let CNO = [];
 let isrental = [];
 let subCategory = [];
-let totalPages = [];
-let currentPage = [];
+let totalPages = 0;
+let currentPage = 1;
 
 const reset = () => {
   bookcount = null;
