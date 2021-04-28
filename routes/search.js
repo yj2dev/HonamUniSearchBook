@@ -139,16 +139,7 @@ const distribute = (total, current) => {
   const arr = [];
   current = parseInt(current);
   let L = current - half;
-  console.log("===current, half : ", current, half);
-  console.log("[TYPE]===current, half : ", typeof current, typeof half);
   let R = current + half;
-  console.log("===current, half : ", current, half);
-  console.log("[TYPE]===current, half : ", typeof current, typeof half);
-  console.log("Add R", current + half);
-  console.log("half: ", half);
-  console.log("L, R: ", L, R);
-  console.log("ARR: ", arr);
-  console.log("total: ", total, "current: ", current);
 
   if (L < 1) {
     R += Math.abs(L) + 1;
@@ -159,13 +150,13 @@ const distribute = (total, current) => {
     L -= R - total;
     R = total;
   }
+
   L = L < 1 ? 1 : L;
 
-  console.log("L, R: ", L, R);
   for (let i = L; i <= R; i++) {
     arr.push(i);
   }
-  console.log("ARR: ", arr);
+
   return arr;
 };
 
@@ -236,13 +227,9 @@ router.get("/", async (req, res, next) => {
           console.error(error);
         }
       }
-      console.log(":: END LOOP");
       console.log("자료 개수 : ", bookcount);
-      console.log("totalPages: ", totalPages);
-      console.log("PAGES: ", PAGES);
 
       pagingArr = distribute(totalPages, PAGES);
-      console.log("pagingArr: ", pagingArr);
       return draw(routerResponse);
     }
   );
