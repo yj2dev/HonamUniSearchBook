@@ -132,7 +132,9 @@
         `pagingindex${currentpage.innerText}`
       );
       const drawactive = () => {
-        ispage.style.color = "#d35400";
+        // ispage.style.color = "#d35400";
+        ispage.style.fontWeight='bold';
+        ispage.style.textDecoration='underline';
       };
       selectList.value = previous_type.textContent;
 
