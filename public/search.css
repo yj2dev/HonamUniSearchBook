@@ -26,6 +26,7 @@ header {
 header:hover {
   cursor: pointer;
 }
+header i {
   position: relative;
   right: 32px;
   top: 12px;
