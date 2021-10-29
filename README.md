@@ -2,8 +2,8 @@
 
 ●개발<br>
  - 소프트웨어학과 2학년 송수영 Python<br>
- - 소프트웨어학과 2학년 이유진 Node, CSS
- ( https://github.com/nogoduck ) <br>
+ - 소프트웨어학과 2학년 <a href="https://github.com/nogoduck ">이유진</a> Node, CSS
+
  <br>
  
  - heroku :  https://honamuni-searchbook.herokuapp.com/ <br>
